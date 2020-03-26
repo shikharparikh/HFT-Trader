@@ -1,13 +1,14 @@
 from selenium import webdriver
 from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
 import os
 from time import sleep
 
 
 email = 'shikhar.p@somaiya.edu'
 password = 'xHFT2020@'
-stock_name = 'Axis Bank'
+stock_name = 'TCS'
 class TradeBot():
     def __init__(self):
         self.driver = webdriver.Chrome('/Users/aadit/Downloads/chromedriver')
@@ -61,10 +62,13 @@ class TradeBot():
         quantity.send_keys("100")
 
         current_price = self.driver.find_element_by_xpath('//*[@id="txt_mktprice"]').get_attribute('value')
-        print(current_price,"and ",type(current_price))
         current_price = float(current_price)
         target = current_price + 15
-        stop_loss = current_price - 15 
+        stop_loss = current_price - 15
+        stop_loss = round(stop_loss,2) 
+
+        gtc = Select(self.driver.find_element_by_xpath('//*[@id="gtc_select"]'))
+        gtc.select_by_index(1)
 
         investment_amount = self.driver.find_element_by_id('invest_amt')
         investment_amount.click()
