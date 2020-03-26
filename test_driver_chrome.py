@@ -41,15 +41,14 @@ class TradeBot():
         sleep(2)
 
         transact_link = link = self.driver.find_element_by_link_text('Transact')
-        #print(transact_link) 
+        
         transact_link.click()
         sleep(1)
 
         email_in = self.driver.find_element_by_class_name('search-input')
         email_in.send_keys(stock_name)
         sleep(3)
-        # search_button = self.driver.find_element_by_id('searchButton')
-        # searchButton.click()
+       
 
         add_btn = self.driver.find_element_by_xpath('//*[@id="auto-suggest"]/ul/li/button')
         add_btn.click()
@@ -78,11 +77,6 @@ class TradeBot():
 
         submit_butn =  self.driver.find_element_by_xpath('//*[@id="btn_submit"]')
         submit_butn.click()       
-
-
-
-        # target = self.driver.find_element_by_xpath('//*[@id="AS-BSE"]/div[2]/div[1]/label/input')
-        # target.send_keys()
 
 
 
