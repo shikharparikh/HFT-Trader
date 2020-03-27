@@ -8,6 +8,7 @@ from time import sleep
 
 start = time.time()
 
+path_shp = "C:/Users/shikh/Downloads/Setups_Zip_files/chromedriver.exe"
 email = 'shikhar.p@somaiya.edu'
 password = 'xHFT2020@'
 stock_name = 'TCS'
@@ -15,7 +16,7 @@ quantity = 50
 
 class TradeBot():
     def __init__(self):
-        self.driver = webdriver.Chrome('/Users/aadit/Downloads/chromedriver')
+        self.driver = webdriver.Chrome(path_shp)
 
     def login(self):
 
@@ -66,7 +67,7 @@ class TradeBot():
         buy_button.click()
 
         quantity = self.driver.find_element_by_xpath('//*[@id="AS-BSE"]/div[2]/div[1]/label/input')
-        quantity.send_keys(quantity)
+        quantity.send_keys(50)
 
         current_price = self.driver.find_element_by_xpath('//*[@id="txt_mktprice"]').get_attribute('value')
         current_price = float(current_price)
