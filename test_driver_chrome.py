@@ -8,7 +8,7 @@ from time import sleep
 
 start = time.time()
 
-path_shp = "C:/Users/shikh/Downloads/Setups_Zip_files/chromedriver.exe"
+path_shp = "/Users/aadit/Downloads/chromedriver"
 email = 'shikhar.p@somaiya.edu'
 password = 'xHFT2020@'
 stock_name = 'TCS'
@@ -90,6 +90,30 @@ class TradeBot():
         submit_butn =  self.driver.find_element_by_xpath('//*[@id="btn_submit"]')
         submit_butn.click()
 
+    def sell_stock(self,selling_link):
+
+    	portfolio_link = self.driver.find_element_by_link_text('Portfolio')
+    	portfolio_link.click()
+
+    	port_link = self.driver.find_element_by_xpath('//*[@id="portfolio"]/div/ul/li[2]/a')
+    	port_link.click()
+    	sleep(1)
+
+    	stocks_link = self.driver.find_element_by_xpath('//*[@id="tib0"]/div[2]/p')
+    	stocks_link.click()
+
+    	elems = self.driver.find_elements_by_xpath("//a[@href]")
+    	for elem in elems:
+    		if elem.get_attribute("href") == selling_link:
+    			elem.click()
+    		print(elem.get_attribute("href"))
+    	
+    	#Sell Button 
+    	#sell_butn =  self.driver.find_element_by_xpath('//*[@id="stocksellBtn"]')
+        #sell_butn.click()
+
+
+
 bot = TradeBot()
 L_start = time.time()
 bot.login()
@@ -98,6 +122,9 @@ bot.transact()
 I_start = time.time()
 bot.input_stock()
 bot.buy_stock()
+primary_ticker = "HSL01"
+selling_link = "https://moneybhai.moneycontrol.com/neworderview/stocks/"+primary_ticker
+bot.sell_stock(selling_link)
 I_end = time.time()
 end = time.time()
 print(f"Total Time taken to run script {end - start} seconds")
