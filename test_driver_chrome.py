@@ -8,7 +8,7 @@ from time import sleep
 
 start = time.time()
 
-path_shp = "/Users/aadit/Downloads/chromedriver"
+path_shp = "C:/Users/shikh/Downloads/Setups_Zip_files/chromedriver.exe"
 email = 'shikhar.p@somaiya.edu'
 password = 'xHFT2020@'
 stock_name = 'TCS'
@@ -107,8 +107,8 @@ class TradeBot():
     		if elem.get_attribute("href") == selling_link:
     			elem.click()
     		print(elem.get_attribute("href"))
-    	
-    	#Sell Button 
+
+    	#Sell Button
     	#sell_butn =  self.driver.find_element_by_xpath('//*[@id="stocksellBtn"]')
         #sell_butn.click()
 
