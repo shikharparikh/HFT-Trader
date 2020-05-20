@@ -16,6 +16,22 @@ def macd(signals):
     return signals
 
 
+#Compute MA for backtesting
+
+def SMA(df, ndays):
+
+    SMA = pd.Series(df['Close'].rolling(ndays).mean(), name = 'SMA')
+    df = df.join(SMA)
+    return df
+
+'''df = pd.read_csv("Alkem Labs.csv")
+n1 = 10
+SMA_10 = SMA(df,n1)
+SMA_10 = SMA_10.dropna()
+ma1 = SMA_10['SMA']
+ma1.mean()
+'''
+
 #signal generation
 #when the short moving average is larger than long moving average, we long and hold
 #when the short moving average is smaller than long moving average, we clear positions
@@ -91,17 +107,31 @@ def main():
     #so it is two week moving average versus one month moving average
     #for now, the ideal choice would be 10 and 21
 
-    global ma1,ma2,stdate,eddate,ticker,slicer
+    global ma1,ma2,stdate,eddate,ticker,df
 
     #macd is easy and effective
     #there is just one issue
     #entry signal is always late
     #watch out for downward EMA spirals!
-    ma1=int(input('ma1:'))
-    ma2=int(input('ma2:'))
-    stdate=input('start date in format yyyy-mm-dd:')
-    eddate=input('end date in format yyyy-mm-dd:')
-    ticker=input('ticker:')
+    #ma1=int(input('ma1:'))
+    #ma2=int(input('ma2:'))
+    #stdate=input('start date in format yyyy-mm-dd:')
+    #eddate=input('end date in format yyyy-mm-dd:')
+    ticker='Alkem Labs'
+    stdate = "2017-02-21"
+    eddate = "2020-05-14"
+
+    #Compute 2 week Moving Average
+    n1 = 10
+    SMA_10 = SMA(df,n1)
+    SMA_10 = SMA_10.dropna()
+    ma1 = SMA_10['SMA']
+
+    #Compute 1 month Moving Average
+    n2 = 21
+    SMA_21 = SMA(df,n2)
+    SMA_21 = SMA_21.dropna()
+    ma2 = SMA_21['SMA']
 
     #slicing the downloaded dataset
     #if the dataset is too large, backtesting plot would look messy
